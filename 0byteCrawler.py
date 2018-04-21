@@ -13,7 +13,7 @@ for dirpath, dirnames, filenames in os.walk(topdir):
         if os.path.getsize(location) == 0:  #Does the actual detection of the problematic file size
             movepath = os.path.join(movedir, name)
             results += '%s\n' % os.path.join(dirpath, name)
-            if os.path.exists(movepath):
+            if os.path.exists(movepath): #I had to add this decision tree to prevent clobbering
                 counter = 0
                 while os.path.exists(movepath):  #Looks for a new name that isn't already taken
                     counter = counter + 1
