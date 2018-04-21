@@ -40,25 +40,3 @@ with open(logname, 'w') as logfile:
 
 
 # Commentary: testing was tricky, because it had to be done on a linux machine. Bash command "touch" was used to create 0-byte files to test on within a mock nested file structure. I also made the mistake of running it on my entire working directory...turns out PyCharm includes some 0-byte files in the venv. So I had to reboot my Python interpreter setup...
-
-#Original model, from https://www.pythoncentral.io/recursive-file-and-directory-manipulation-in-python-part-1
-
-# import os
-#
-# # The top argument for walk
-# topdir = '.'
-# # The extension to search for
-# exten = '.txt'
-# logname = 'findfiletype.log'
-# # What will be logged
-# results = str()
-#
-# for dirpath, dirnames, files in os.walk(topdir):
-#     for name in files:
-#         if name.lower().endswith(exten):
-#             # Save to results string instead of printing
-#             results += '%s\n' % os.path.join(dirpath, name)
-#
-# # Write results to logfile
-# with open(logname, 'w') as logfile:
-#     logfile.write(results)
