@@ -9,6 +9,10 @@ for root, dirs, files in os.walk(working_dir):
         subindent = '|  ' * (level + 1)
         for f in files:
             print('{}{}'.format(subindent, f))
+                # I'd like to replace this part with a loop that, instead of 
+                # listing each individual file, lists the first few of each file
+                # extension, then provides a count of how many of that type there are
+                # in the directory. This should be simple enough.
 
 duration = 1  # second
 freq = 440  # Hz
