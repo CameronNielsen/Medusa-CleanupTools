@@ -2,7 +2,8 @@
 
 A suite of Python tools for cleaning up legacy digital collections. It's also my final class project for IS 452.
 
-**For the midpoint check in**
+**For the midpoint check in**:
+
 What I have so far is one fairly polished module, the 0-byte crawler. Since the project begain, I have elaborated upon to give the ability to avoid clobbering and just generally tested it further and made it more robust.
 
 As for the other modules, what I have so far is a start on a report generator, to create tree diagrams and sound a bell when the process is finished. This bit still consists of pasted-together recipes that I haven't fully reverse-engineered yet. Once I have a better idea of how they work, I'll want to intigrate these functions back into my main modules.
