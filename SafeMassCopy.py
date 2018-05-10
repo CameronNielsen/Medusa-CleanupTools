@@ -5,38 +5,48 @@ filein = open('addresses.txt', 'r')
 test_strings = filein.readlines()
 filein.close()
 
-# This function finds the collection ID number from the Medusa file system, which is always immediately under the root directory.
-def find_coll_id(source_addr):
-    if "root" in source_addr:
-        directories_list = source_addr.split("/")
-        root_index = directories_list.index("root")
-        collection_id = directories_list[root_index + 1]
-        return collection_id
-    else:
-        print("You're using the wrong script!")
+report = open('DiffReports.txt', 'w')
 
-# def run_rsync(args):
-#     import subprocess
-#
+import subprocess   # This module was a pain to figure out
 
 for raw_input in test_strings:
-    raw_input = raw_input.replace("\\", "/")
-    if "\t" in raw_input:
-        both_items = raw_input.split("\t")
-        raw_source = both_items[0]
-        supp_id = both_items[1]
-        coll_id = find_coll_id(raw_source)
-        print(coll_id, supp_id)
+    raw_input = raw_input.replace("\\", "/")    # Cleans the backslashes out of input (because they come from Windows)
+        # The following decision tree is to account for different text editors handling of tabs, and the option given
+        # to the user to either append a supplemental ID or not.
+    if "root" in raw_input:
+        directories_list = raw_input.split("/")
+        root_index = directories_list.index("root")
+        coll_id = directories_list[root_index + 1]
+    else:
+        print("Something is wrong with your input!")
+        break
 
+    source = str(raw_input)
 
-    elif "    " in raw_input:
-        both_items = raw_input.split("    ")
-        raw_source = both_items[0]
+    if "\t" in source:
+        both_items = source.split("\t")
+        source_addr = both_items[0]
         supp_id = both_items[1]
-        coll_id = find_coll_id(raw_source)
-        print(coll_id, supp_id)
+        rsync = ['rsync', '-r', '--progress', "TestZone/root/1114/2565/.", ('./' + coll_id + '-' + supp_id)]
+            # The first address won't be hard coded in the final version
+        subprocess.call(rsync)
+        diff = ['diff', '-r', "TestZone/root/1114/2565/.", ('./' + coll_id + '-' + supp_id)]
+        subprocess.call(diff, stdout=report)    # Note to self: THIS is the correct way to pipe stout in subprocess, so
+            # DO NOT try to use native Bash operators like >> !
+
+    elif "   " in source:
+        both_items = source.split("   ")
+        source_addr = both_items[0]
+        supp_id = both_items[1]
+        rsync = ['rsync', '-r', '--progress', "TestZone/root/1114/2565/.", ('./' + coll_id + '-' + supp_id)]
+        subprocess.call(rsync)
+        diff = ['diff', '-r', "TestZone/root/1114/2565/.", ('./' + coll_id + '-' + supp_id)]
+        subprocess.call(diff, stdout=report)
 
     else:
-        coll_id = find_coll_id(raw_input)
-        print(coll_id)
+        rsync = ['rsync', '-r', '--progress', "TestZone/root/1114/2565/.", ('./' + coll_id)]
+        subprocess.call(rsync)
+        diff = ['diff', '-r', "TestZone/root/1114/2565/.", ('./' + coll_id)]
+        subprocess.call(diff, stdout=report)
 
+report.close()

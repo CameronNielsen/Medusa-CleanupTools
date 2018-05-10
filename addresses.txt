@@ -1,3 +1,2 @@
 T:\medusa\production\root\1234\irrelevant
-R:\medusa\garbage\production\root\4567\irrelevant NAME
-Z:\wrongthing\not-here-doofus
+R:\medusa\garbage\production\root\4567\irrelevant   NAME
