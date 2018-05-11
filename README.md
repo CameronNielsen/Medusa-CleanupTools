@@ -2,7 +2,7 @@
 
 A suite of Python tools for cleaning up legacy digital collections. It's also my final class project for IS 452. These are simple scripts for performing well-defined tasks as part of my regular duties, so they are designed to be run in a Linux console (by cd'ing to their working location and then invoking them with "python3 scriptName.py"), sometimes with inputs from my Windows workstation (ie, they're designed to tolerate input addresses with backslashes). As of my final submission for that class, the project includes the following 5 finished scripts:
 
-# TreeReporter
+## TreeReporter
 Recursively generates a tree diagram of the specified location, listing the total number and size of each file extension in each subdirectory, and displays it in the console. (Future goals: print to csv.)
 
 ## 0byteReporter.py
