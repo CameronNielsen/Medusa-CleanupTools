@@ -1,5 +1,5 @@
-# This script requires an input called addresses.txt consisting of full paths of the files to be copied, one per line.
-# If desired, a supplementary identifier or name for the staged file can be added after a tab.
+# This script requires an input called addresses.txt consisting of full paths of the files to be copied into the 
+# staging area, one per line. If desired, a supplementary identifier for the staged file can be added after a tab.
 
 filein = open('addresses.txt', 'r')
 test_strings = filein.readlines()
