@@ -1,4 +1,5 @@
-# Generates a list of all 0-byte files in a specified directory, arranged in a tree.
+# Generates a list of all 0-byte files in a specified directory, arranged in a tree, and prints them to a 
+# uniquely-named file.
 
 import os
 import datetime
