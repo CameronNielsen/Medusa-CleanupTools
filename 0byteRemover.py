@@ -1,3 +1,7 @@
+# Recursively detects empty files (with filesize of 0 bytes) from a specified location, then moves them to another specified 
+# directory for inspection and/or deletion. Automatically renames identically-named files to prevent clobbering. Prints
+# listing of removed file paths to txt file in default working location.
+
 import os
 import datetime
 
@@ -13,7 +17,7 @@ for root, dirs, files in os.walk(topdir):
         if os.path.getsize(location) == 0:  #Does the actual detection of the problematic file size
             movepath = os.path.join(movedir, name)
             results += '%s\n' % os.path.join(root, name)
-            if os.path.exists(movepath): #I had to add this decision tree to prevent clobbering
+            if os.path.exists(movepath):  #I had to add this decision tree to prevent clobbering
                 base_filename = str(os.path.splitext(name)[0])
                 file_ext = str(os.path.splitext(name)[1])
                 counter = 0
@@ -37,13 +41,14 @@ if os.path.exists(logname):
         logname = base_logname + "_" + str(counter) + ".txt"
 
 report = open(logname, 'w')
-print("The following files removed at", str(datetime.datetime.now()), '\n', file=report)
-report.write(results)
+print("The following files removed at", str(datetime.datetime.now()), '\n', file=report)  #Writes a date/time heading
+report.write(results)  # Writes the removed files list
 report.close()
 
 # Commentary: testing was tricky, because it had to be done on a linux machine. Bash command "touch" was
 # used to create 0-byte files to test on within a mock nested file structure. I also made the mistake of
 # running it on my entire working directory...turns out PyCharm includes some 0-byte files in the venv.
-# So I had to create my Python interpreter setup. Debugging was torturous, and I ended up completely rewriting
-# the filename clobbering avoidance sections to use os.path because my original version, using just string
-# manipulation, spat out weird stuff in certain circumstances.
+# So I had to create my Python interpreter setup.
+# Debugging was torturous, and I ended up completely rewriting the filename clobbering avoidance sections 
+# to use os.path because my original version, using just string manipulation, spat out weird stuff in 
+# certain circumstances.
