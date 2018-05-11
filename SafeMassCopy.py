@@ -50,3 +50,7 @@ for raw_input in test_strings:
         subprocess.call(diff, stdout=report)
 
 report.close()
+
+# Rings the console's bell when copying is complete
+subprocess.call(["echo", "-e", "\a"])
+subprocess.call(["echo", "-ne", "\007"])
