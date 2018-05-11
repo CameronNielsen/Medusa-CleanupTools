@@ -54,3 +54,6 @@ for root, dirs, files in os.walk(working_dir):
         fsize_total = convert_size(fsizes_dict[ext_key])
         print('{}{}'.format(subindent, i[0] + "\t\t(" + count + ")" + "\t\t" + fsize_total))
         # I want to study .format more so I can make this output look nicer. But it's fine for now.
+
+
+# Next steps: add option to output to csv
