@@ -7,12 +7,12 @@ movedir = input("Enter the full path of the directory to move 0-byte files to: "
 logname = '0bytesRemovedReport.txt'
 results = str()
 
-for dirpath, dirnames, filenames in os.walk(topdir):
-    for name in filenames:
-        location = os.path.join(dirpath, name)
+for root, dirs, files in os.walk(topdir):
+    for name in files:
+        location = os.path.join(root, name)
         if os.path.getsize(location) == 0:  #Does the actual detection of the problematic file size
             movepath = os.path.join(movedir, name)
-            results += '%s\n' % os.path.join(dirpath, name)
+            results += '%s\n' % os.path.join(root, name)
             if os.path.exists(movepath): #I had to add this decision tree to prevent clobbering
                 base_filename = str(os.path.splitext(name)[0])
                 file_ext = str(os.path.splitext(name)[1])
