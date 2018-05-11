@@ -1,18 +1,18 @@
+# Sorts PDI photographs by serial number into their appropriate locations in the born-digital reformatting
+# output filesystem. Should work on Windows and Linux, but only tested on Windows so far.
+
 import glob
 import shutil
 import os
 
-# fileext = input("Enter file extension of the files you want to move (without the dot): ")
-# origin = input("Enter full path of the directory files to be moved are located in (ending with /): ")
-# dest = input("Enter full path of the directory files are to be sorted into (ending with /): ")
-fileext = "txt"
-origin = "./Test/"
-dest = "./Test/"
+fileext = input("Enter file extension of the files you want to move (without the dot): ")
+origin = input("Enter full path of the directory files to be moved are located in (ending with /): ")
+input("Enter full path of the directory files are to be sorted into (ending with /): ")
 
 files = glob.glob(origin + '*.' + fileext)
 
 for file in files:
-    file = os.path.normpath(file)
+    file = os.path.normpath(file) 
     file_name = os.path.basename(file)
     id_number = file_name.split("_")[0]
     dest_dir_loc = os.path.join(dest, id_number)
@@ -25,8 +25,5 @@ for file in files:
             shutil.copy2(origin_path, dest_path)
     else:
         print(dest_dir_loc, "does not exist!")
-# To do: Add comments, make input/output less brittle, clean out ALL back slashes, add error messages for files not
-# present, fix whatever makes it crash with large numbers of big files
-# New To Do after talking to Henry: use os.path for all cleanup of addresses, etc. Error handling for if no files.
-# Use debugger to figure out what's going wrong!
-# Update 4/30 --I think it's done?! Except for comments and some stress testing?
+
+        # Future goals: make it more flexible so it can be used to sort files in other contexts as well.
