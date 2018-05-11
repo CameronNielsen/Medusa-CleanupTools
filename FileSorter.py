@@ -7,7 +7,7 @@ import os
 
 fileext = input("Enter file extension of the files you want to move (without the dot): ")
 origin = input("Enter full path of the directory files to be moved are located in (ending with /): ")
-input("Enter full path of the directory files are to be sorted into (ending with /): ")
+dest = input("Enter full path of the directory files are to be sorted into (ending with /): ")
 
 files = glob.glob(origin + '*.' + fileext)
 
