@@ -2,26 +2,27 @@
 # staging area, one per line. If desired, a supplementary identifier for the staged file can be added after a tab.
 
 filein = open('addresses.txt', 'r')
-test_strings = filein.readlines()
+addresses = filein.readlines()
 filein.close()
 
 report = open('DiffReports.txt', 'w')
 
 import subprocess   # This module was a pain to figure out
 
-for raw_input in test_strings:
-    raw_input = raw_input.replace("\\", "/")    # Cleans the backslashes out of input (because they come from Windows)
+for raw_addr in addresses:
+    raw_addr = raw_addr.replace("\\", "/")    # Cleans the backslashes out of input (because they come from Windows)
         # The following decision tree is to account for different text editors handling of tabs, and the option given
         # to the user to either append a supplemental ID or not.
-    if "root" in raw_input:
-        directories_list = raw_input.split("/")
+    if "root" in raw_addr:
+        directories_list = raw_addr.split("/")
         root_index = directories_list.index("root")
         coll_id = directories_list[root_index + 1]
+        blfg_id = directories_list[root_index + 2]
     else:
         print("Something is wrong with your input!")
         break
 
-    source = str(raw_input)
+    source = str(raw_addr)
 
     if "\t" in source:
         both_items = source.split("\t")

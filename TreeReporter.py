@@ -5,7 +5,8 @@ import os
 import math
 
 working_dir = input("Input full path of directory to evaluate: ")
-
+report_name = os.path.basename(working_dir)    # Finds clean base name to identify printed report
+outfile = open(report_name + '_TreeExtReport.txt', 'w')
 
 def convert_size(size_bytes):  # Copypasta from StackExchange to make output more human-readable
     if size_bytes == 0:
@@ -26,7 +27,8 @@ for root, dirs, files in os.walk(working_dir):
     # that makes .sep not work properly (https://youtrack.jetbrains.com/issue/PY-29249), so forgive me if this spacing
     # bit isn't working right. It worked fine for me before the last PyCharm update. XP
     indent = '|  ' * (level)
-    print('{}{}/'.format(indent, os.path.basename(root)))
+    dirline_out = ('{}{}/'.format(indent, os.path.basename(root)))
+    print(dirline_out, file=outfile)
 
     subindent = '|  ' * (level + 1)
     counts_dict = {}
@@ -52,8 +54,8 @@ for root, dirs, files in os.walk(working_dir):
         count = str(i[1])
         ext_key = i[0]
         fsize_total = convert_size(fsizes_dict[ext_key])
-        print('{}{}'.format(subindent, i[0] + "\t\t(" + count + ")" + "\t\t" + fsize_total))
-        # I want to study .format more so I can make this output look nicer. But it's fine for now.
+        filesline_out = ('{}{}'.format(subindent, i[0] + "\t(" + count + ")" + "\t" + fsize_total))
+        print(filesline_out, file=outfile)
 
 
 # Next steps: add option to output to csv
