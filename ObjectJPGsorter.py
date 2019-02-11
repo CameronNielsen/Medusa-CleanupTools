@@ -1,6 +1,7 @@
 # Sorts PDI photographs by serial number into their appropriate locations in the born-digital reformatting
 # output filesystem. Should work on Windows and Linux, but only tested on Windows so far.
 
+
 import glob
 import shutil
 import os
