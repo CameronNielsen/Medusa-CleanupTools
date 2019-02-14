@@ -2,6 +2,9 @@
 # files using HandBrakeCLI. The latter program is expected to be located at C:\Program Files\HandBrake\HandBrakeCLI.exe.
 # The derivative files thus created are placed in a directory called MigratedFiles parallel to the OriginalFiles
 # directory already existing.
+# The VIDEO_TS directory name is a part of the DVD specification, so it is hard-coded in as both the search term and the
+# file name for derivative outputs.
+
 # By Cameron Nielsen, Feb. 12, 2019
 
 import os
@@ -26,7 +29,7 @@ for item_level_dir in os.listdir(working_dir):
             content_dir_str = str(content_dir)
             disk_level_dir = content_dir_str.split("OriginalFiles")[0]
             migratedfiles_dir = os.path.join(disk_level_dir, "MigratedFiles/")
-            output_file_name = os.path.join(migratedfiles_dir + str(item_level_dir) + ".mp4")
+            output_file_name = os.path.join(migratedfiles_dir + "/VIDEO_TS~d3r1v.mp4")
             migratedfiles_dir = os.path.normpath(migratedfiles_dir)
             output_file_name = os.path.normpath(output_file_name)
             os.mkdir(migratedfiles_dir)
