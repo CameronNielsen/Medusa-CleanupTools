@@ -11,8 +11,8 @@ import os
 import glob
 import subprocess
 
-working_dir = input("Enter the full path of the content directory of the collection with DVD videos to convert: ")
-# working_dir = os.getcwd()
+# working_dir = input("Enter the full path of the content directory of the collection with DVD videos to convert: ")
+working_dir = os.getcwd()
 
 for item_level_dir in os.listdir(working_dir):
     item_level_path = os.path.join(working_dir, item_level_dir)
@@ -33,6 +33,6 @@ for item_level_dir in os.listdir(working_dir):
             migratedfiles_dir = os.path.normpath(migratedfiles_dir)
             output_file_name = os.path.normpath(output_file_name)
             os.mkdir(migratedfiles_dir)
-            subprocess.run(["C:\Program Files\HandBrake\HandBrakeCLI.exe", "-i", content_dir, "-o", output_file_name, "-e", "x264", "-q", "20", "-B", "160"])
+            subprocess.run(["C:\Program Files\HandBrake\HandBrakeCLI.exe", "-i", content_dir, "-o", output_file_name, "-e", "x264", "-q", "20", "-B", "160", "--comb-detect=fast", "-5"])
             print("Converted video file created at", output_file_name, '\n', file=log)
             log.close()
